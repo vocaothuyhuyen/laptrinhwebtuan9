@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
         // Tạo người dùng admin
         $admin = User::create([
             'name' => 'admin',
-            'email' => 'admin789@gmail.com',
+            'email' => 'admin123@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
             'remember_token' => Str::random(10)
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
             ]);
 
             // Gán 1 hoặc 2 vai trò ngẫu nhiên
-            $randomRoles = collect($roles)->random(1,2)->pluck('id');
+            $randomRoles = collect($roles)->random(1,2)->pluck('id')->toArray();
             $user->roles()->attach($randomRoles);
         }
     }
