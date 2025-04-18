@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
             ]);
 
             // Gán 1 hoặc 2 vai trò ngẫu nhiên
-            $randomRoles = collect($roles)->random(1,2)->pluck('id')->toArray();
+            $randomRoles = collect($roles)->random(rand(1,2))->pluck('id')->toArray();
             $user->roles()->attach($randomRoles);
         }
     }
