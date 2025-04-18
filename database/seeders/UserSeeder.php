@@ -46,14 +46,14 @@ class UserSeeder extends Seeder
         for ($i = 1; $i < 100; $i++) {
             $user = User::create([
                 'name' => 'user' . $i,
-                'email' => 'lmp' . $i . '@gmail.com',
+                'email' => 'vcth' . $i . '@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456'),
                 'remember_token' => Str::random(10)
             ]);
 
             // Gán 1 hoặc 2 vai trò ngẫu nhiên
-            $randomRoles = collect($roles)->pluck('id');
+            $randomRoles = collect($roles)->random(1,2)->pluck('id');
             $user->roles()->attach($randomRoles);
         }
     }
