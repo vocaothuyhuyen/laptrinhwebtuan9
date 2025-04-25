@@ -19,6 +19,5 @@ class Order extends Model
 {
     return $this->hasMany(Product::class);
 }
-// app/Models/Order.php
 
 }

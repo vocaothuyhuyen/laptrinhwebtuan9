@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     public function readRole($role_id){
-            $role = Role::findOrFail($role_id); // Lấy vai trò hoặc báo lỗi nếu không tìm thấy
+            $role = Role::findOrFail($role_id); 
             $users = User::whereHas('roles', function ($query) use ($role_id) {
                 $query->where('roles.id', $role_id);
-            })->with('roles')->get(); // Lấy người dùng có vai trò này
+            })->with('roles')->get(); 
     
             return view('crud_user.role', compact('users', 'role'));
     }

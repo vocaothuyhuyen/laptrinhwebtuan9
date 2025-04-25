@@ -34,27 +34,18 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+    
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
-    /**
-     * Mối quan hệ với bảng roles
-     */
+    
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, "user_role");
     }
 
-    /**
-     * Mối quan hệ với đơn hàng (Has Many)
-     */
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);

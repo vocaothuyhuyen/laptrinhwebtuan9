@@ -12,17 +12,13 @@ use Illuminate\Support\Facades\Session;
 class CrudUserController extends Controller
 {
 
-    /**
-     * Login page
-     */
+   
     public function login()
     {
         return view('crud_user.login');
     }
 
-    /**
-     * User submit form login
-     */
+ 
     public function authUser(Request $request)
     {
         $request->validate([
@@ -40,17 +36,13 @@ class CrudUserController extends Controller
         return redirect("login")->withSuccess('Login details are not valid');
     }
 
-    /**
-     * Registration page
-     */
+  
     public function createUser()
     {
         return view('crud_user.create');
     }
 
-    /**
-     * User submit form register
-     */
+   
     public function postUser(Request $request)
     {
         $request->validate([
@@ -73,9 +65,6 @@ class CrudUserController extends Controller
         return redirect("login");
     }
 
-    /**
-     * View user detail page
-     */
     public function readUser(Request $request)
     {
         $user_id = $request->get('id');
@@ -84,18 +73,14 @@ class CrudUserController extends Controller
         return view('crud_user.read', ['messi' => $user]);
     }
 
-    /**
-     * Delete user by id
-     */
+  
     public function deleteUser($id)
     {
         User::destroy($id);
         return redirect("list")->withSuccess('User deleted successfully');
     }
 
-    /**
-     * Form update user page
-     */
+   
     public function updateUser(Request $request)
     {
         $user_id = $request->get('id');
@@ -104,9 +89,6 @@ class CrudUserController extends Controller
         return view('crud_user.update', ['user' => $user]);
     }
 
-    /**
-     * Submit form update user
-     */
     public function postUpdateUser(Request $request)
     {
         $input = $request->all();
@@ -130,16 +112,8 @@ class CrudUserController extends Controller
         return redirect("list")->withSuccess('You have signed-in');
     }
 
-    /**
-     * List of users
-     */
     public function listUser()
     {
-        //        $users = [
-        //                'users' => User::all()
-        //        ];
-        //        return view('crud_user.ronaldo', $users);
-
         if (Auth::check()) {
             $users = User::with('roles')->paginate(10);
             return view('crud_user.list', ['users' => $users]);
@@ -148,9 +122,6 @@ class CrudUserController extends Controller
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
-    /**
-     * Sign out
-     */
     public function signOut()
     {
         Session::flush();
@@ -160,17 +131,15 @@ class CrudUserController extends Controller
     }
     public function index(Request $request)
     {
-        // Lấy giá trị tìm kiếm từ request
         $search = $request->input('search');
 
-        // Tìm kiếm theo tên người dùng, email và mã đơn hàng
         $users = User::where(function ($query) use ($search) {
             $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('email', 'like', '%' . $search . '%')
                 ->orWhereHas('orders', function ($query) use ($search) {
                     $query->where('order_number', 'like', '%' . $search . '%');
                 });
-        })->paginate(10);  // Sử dụng phân trang
+        })->paginate(10);  
 
         return view('crud_user.list', compact('users'));
     }
