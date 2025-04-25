@@ -39,5 +39,7 @@ Route::get('/', function () {
 });
 
 Route::get('/role/{id}', [RoleController::class, 'readRole'])->name('role');
+// show sản phẩm của order 
 Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.show');
+// tìm kiếmkiếm
 Route::get('/users', [CrudUserController::class, 'index'])->name('user.index');
