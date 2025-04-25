@@ -12,11 +12,10 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        // Lấy đơn hàng theo ID và eager load sản phẩm và người dùng
         $order = Order::with('products', 'user')->findOrFail($id);
-    
-        // Trả về view chi tiết đơn hàng
+
+        // Đảm bảo rằng bạn trả về đúng view 'crud_user.show'
         return view('crud_user.show', compact('order'));
     }
-    
+
 }

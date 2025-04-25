@@ -3,6 +3,7 @@
 use App\Http\Controllers\CrudUserController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,4 @@ Route::get('/', function () {
 });
 
 Route::get('/role/{id}', [RoleController::class, 'readRole'])->name('role');
+Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.show');
