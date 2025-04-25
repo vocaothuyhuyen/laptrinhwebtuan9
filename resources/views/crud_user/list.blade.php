@@ -4,7 +4,12 @@
     <div class="container my-5">
 
         <h4 class="text-center mb-3">Danh sách user</h4>
-
+        <!-- Form tìm kiếm -->
+        <form method="GET" action="{{ route('user.index') }}" class="mb-3">
+            <input type="text" name="search" value="{{ request()->input('search') }}" class="form-control"
+                placeholder="Tìm kiếm theo tên người dùng, email, hoặc mã đơn hàng">
+            <button type="submit" class="btn btn-primary mt-2">Tìm kiếm</button>
+        </form>
         <table class="table table-bordered table-striped text-center">
             <thead>
                 <tr>

@@ -40,3 +40,4 @@ Route::get('/', function () {
 
 Route::get('/role/{id}', [RoleController::class, 'readRole'])->name('role');
 Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.show');
+Route::get('/users', [CrudUserController::class, 'index'])->name('user.index');

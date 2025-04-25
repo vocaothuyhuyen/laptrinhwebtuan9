@@ -87,7 +87,7 @@ class CrudUserController extends Controller
     /**
      * Delete user by id
      */
-    public function deleteUser($id) 
+    public function deleteUser($id)
     {
         User::destroy($id);
         return redirect("list")->withSuccess('User deleted successfully');
@@ -158,4 +158,21 @@ class CrudUserController extends Controller
 
         return Redirect('login');
     }
+    public function index(Request $request)
+    {
+        // Lấy giá trị tìm kiếm từ request
+        $search = $request->input('search');
+
+        // Tìm kiếm theo tên người dùng, email và mã đơn hàng
+        $users = User::where(function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhereHas('orders', function ($query) use ($search) {
+                    $query->where('order_number', 'like', '%' . $search . '%');
+                });
+        })->paginate(10);  // Sử dụng phân trang
+
+        return view('crud_user.list', compact('users'));
+    }
+
 }
