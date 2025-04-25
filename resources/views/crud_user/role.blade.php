@@ -1,7 +1,10 @@
 @extends('dashboard')
 
 @section('content')
+
 <div class="container my-5">
+<a href="{{ url()->previous() }}" class="btn btn-secondary mt-3">← Quay lại</a>
+
     <table class="table table-bordered table-striped text-center">
         <thead>
             <tr>
